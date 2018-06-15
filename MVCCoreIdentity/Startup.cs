@@ -25,7 +25,8 @@ namespace MVCCoreIdentity
             var connection = @"Server=(localdb)\mssqllocaldb;Database=MVCIdentityTest;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));
 
-            services.AddIdentity<BaseUser, IdentityRole>()
+            services.AddIdentity<BaseUser, IdentityRole>(options => 
+                    options.Password.RequireNonAlphanumeric = false)
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
 
@@ -42,6 +43,7 @@ namespace MVCCoreIdentity
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+
             app.UseAuthentication();
 
             if (env.IsDevelopment())

@@ -19,6 +19,10 @@ namespace MVCCoreIdentity
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                //.UseKestrel()
+                //.UseUrls("http://localhost:56545/")
+                //.UseContentRoot(Directory.GetCurrentDirectory())
+                //.UseIISIntegration()
                 .UseStartup<Startup>()
                 .Build();
     }
